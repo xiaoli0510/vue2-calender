@@ -19,6 +19,7 @@ var vm = new Vue({
         this.getToday();
     },
     methods: {
+        //初始化今天的日期：年，月，日
         getToday: function () {
             var date = new Date();
             var year = date.getFullYear(); //年
@@ -28,9 +29,11 @@ var vm = new Vue({
         },
         getData: function (obj) {
             var date = new Date();
+            //修改月份时
             if (this.sureMonthFlag) {
                 date = new Date(this.selYear, this.selMonth, 1);
             }
+            //修改年时
             if (this.sureYearFlag) {
                 date = new Date(this.selYear, this.selMonth, 1);
             }
@@ -48,6 +51,7 @@ var vm = new Vue({
             var weekDay = date.getDay(); //是本周的第几天
             this.getWeek(year, month, day, weekDay);
         },
+        //初始化周日历数据
         getWeek: function (year, month, day, weekDay) {
             this.arr = [];
             for (var i = 0; i < 7; i++) {
@@ -77,11 +81,11 @@ var vm = new Vue({
             this.month = this.arr[6].month; //周日历数组的最后一个值的month为当前month
             this.day = this.arr[6].day; //周日历数组的最后一个值的day为当前day
         },
-        //确定日期
+        //点击日期
         sureDay: function (value) {
             this.activeDay = value;//根据此值去发送请求即可
         },
-        //确定月份
+        //点击月份
         sureMonth: function (item) {
             this.count = 0;
             this.selMonth = item;
@@ -90,7 +94,7 @@ var vm = new Vue({
             this.selYear = this.year;
             this.getData();
         },
-        //确定年份
+        // 点击年份
         sureYear: function (value) {
             this.count = 0;
             this.sureYearFlag = true;
